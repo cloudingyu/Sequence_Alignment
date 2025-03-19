@@ -43,9 +43,12 @@ void Print_Repeat_Information(Repeat_All_Information repeatAnswer)
     for(int i=0;i<repeatAnswer.Repeat_Information_Number;i++)
     {
         cout<<setw(4)<<i+1<<setw(15);
-        cout<<repeatAnswer.Repeat_Information[i].Repeat_Location<<setw(15);
+        cout<<repeatAnswer.Repeat_Information[i].Repeat_Location<<setw(17);
         cout<<repeatAnswer.Repeat_Information[i].Repeat_Length<<setw(10);
-        cout<<repeatAnswer.Repeat_Information[i].Repeat_Times<<setw(10);
-        cout<<repeatAnswer.Repeat_Information[i].Repeat_Whether_Reverse?true:false<<endl;
+        cout<<repeatAnswer.Repeat_Information[i].Repeat_Times<<setw(13);
+        if(repeatAnswer.Repeat_Information[i].Repeat_Whether_Reverse)
+            cout<<"True"<<endl;
+        else
+            cout<<"False"<<endl;
     }
 }

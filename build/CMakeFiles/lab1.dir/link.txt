@@ -1,3 +1,1 @@
-"C:\Program Files\cmake-4.0.0-rc4-windows-x86_64\bin\cmake.exe" -E rm -f CMakeFiles\lab1.dir/objects.a
-C:\PROGRA~1\mingw64\bin\ar.exe qc CMakeFiles\lab1.dir/objects.a @CMakeFiles\lab1.dir\objects1.rsp
-C:\PROGRA~1\mingw64\bin\C__~1.EXE -g -Wl,--whole-archive CMakeFiles\lab1.dir/objects.a -Wl,--no-whole-archive -o C:\ComputerScience\Algorithm_design_and_analysis_project\lab1\bin\lab1.exe -Wl,--out-implib,liblab1.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\lab1.dir\linkLibs.rsp
+/usr/bin/clang++ -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/lab1.dir/lab1/src/lab1.cpp.o CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.o -o /Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/bin/lab1

@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/src/HeadFile/repeat.cpp" "CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.obj" "gcc" "CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.obj.d"
-  "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/src/lab1.cpp" "CMakeFiles/lab1.dir/lab1/src/lab1.cpp.obj" "gcc" "CMakeFiles/lab1.dir/lab1/src/lab1.cpp.obj.d"
+  "/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src/HeadFile/repeat.cpp" "CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.o" "gcc" "CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.o.d"
+  "/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src/lab1.cpp" "CMakeFiles/lab1.dir/lab1/src/lab1.cpp.o" "gcc" "CMakeFiles/lab1.dir/lab1/src/lab1.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

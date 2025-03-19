@@ -1,14 +1,14 @@
 [
 {
-  "directory": "C:/ComputerScience/Algorithm_design_and_analysis_project/build",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/lab1.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\lab1.dir\\lab1\\src\\lab1.cpp.obj -c C:\\ComputerScience\\Algorithm_design_and_analysis_project\\lab1\\src\\lab1.cpp",
-  "file": "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/src/lab1.cpp",
-  "output": "CMakeFiles/lab1.dir/lab1/src/lab1.cpp.obj"
+  "directory": "/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/build",
+  "command": "/usr/bin/clang++  -I/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -o CMakeFiles/lab1.dir/lab1/src/lab1.cpp.o -c /Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src/lab1.cpp",
+  "file": "/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src/lab1.cpp",
+  "output": "CMakeFiles/lab1.dir/lab1/src/lab1.cpp.o"
 },
 {
-  "directory": "C:/ComputerScience/Algorithm_design_and_analysis_project/build",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/lab1.dir/includes_CXX.rsp -g -std=gnu++11 -o CMakeFiles\\lab1.dir\\lab1\\src\\HeadFile\\repeat.cpp.obj -c C:\\ComputerScience\\Algorithm_design_and_analysis_project\\lab1\\src\\HeadFile\\repeat.cpp",
-  "file": "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/src/HeadFile/repeat.cpp",
-  "output": "CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.obj"
+  "directory": "/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/build",
+  "command": "/usr/bin/clang++  -I/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -o CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.o -c /Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src/HeadFile/repeat.cpp",
+  "file": "/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/src/HeadFile/repeat.cpp",
+  "output": "CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.o"
 }
 ]
