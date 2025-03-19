@@ -39,16 +39,18 @@ Repeat_All_Information Repeat_Process(string reference,string query)
 
 void Print_Repeat_Information(Repeat_All_Information repeatAnswer)
 {
-    cout<<setw(3)<<"序号 | 额外重复出现位置(ref) | 序列长度 | 重复次数 | 是否反向"<<endl;
+    cout<<endl<<endl;
+    cout<<setw(5)<<"No."<<" | Repetition location(ref) | Sequence length | Repetition times | Reverse"<<endl;
     for(int i=0;i<repeatAnswer.Repeat_Information_Number;i++)
     {
         cout<<setw(4)<<i+1<<setw(15);
-        cout<<repeatAnswer.Repeat_Information[i].Repeat_Location<<setw(17);
-        cout<<repeatAnswer.Repeat_Information[i].Repeat_Length<<setw(10);
-        cout<<repeatAnswer.Repeat_Information[i].Repeat_Times<<setw(13);
+        cout<<repeatAnswer.Repeat_Information[i].Repeat_Location<<setw(22);
+        cout<<repeatAnswer.Repeat_Information[i].Repeat_Length<<setw(18);
+        cout<<repeatAnswer.Repeat_Information[i].Repeat_Times<<setw(17);
         if(repeatAnswer.Repeat_Information[i].Repeat_Whether_Reverse)
             cout<<"True"<<endl;
         else
             cout<<"False"<<endl;
     }
+    cout<<endl<<endl;
 }
