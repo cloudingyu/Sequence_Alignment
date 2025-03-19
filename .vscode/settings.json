@@ -4,5 +4,8 @@
         "string": "cpp",
         "iostream": "cpp",
         "iomanip": "cpp"
-    }
+    },
+    "cmake.generator": "MinGW Makefiles",
+    "cmake.configureOnOpen": true
+
 }

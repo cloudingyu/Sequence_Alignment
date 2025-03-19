@@ -2,7 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "/Users/chenjane/Desktop/\u8ba1\u7b97\u673a\u79d1\u5b66\u4e0e\u6280\u672f/\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790/Algorithm_design_and_analysis_project/lab1/bin/lab1"
+			"path" : "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/bin/lab1.exe"
+		},
+		{
+			"path" : "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/bin/lab1.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -42,14 +45,14 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk"
+					"fragment" : "-g -std=gnu++11"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/Users/chenjane/Desktop/\u8ba1\u7b97\u673a\u79d1\u5b66\u4e0e\u6280\u672f/\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790/Algorithm_design_and_analysis_project/lab1/src"
+					"path" : "C:/ComputerScience/Algorithm_design_and_analysis_project/lab1/src"
 				}
 			],
 			"language" : "CXX",
@@ -78,14 +81,14 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
-				"role" : "flags"
+				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
+				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "lab1",
-	"nameOnDisk" : "lab1",
+	"nameOnDisk" : "lab1.exe",
 	"paths" : 
 	{
 		"build" : ".",
