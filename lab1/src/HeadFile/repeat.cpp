@@ -52,7 +52,7 @@ void Print_Repeat_Information(Repeat_All_Information repeatAnswer)
     for(int i = 0; i < repeatAnswer.Repeat_Information.size(); i++)
     {
         cout << setw(4) << i+1 << setw(15);
-        cout << repeatAnswer.Repeat_Information[i].Repeat_Location << setw(22);
+        cout << repeatAnswer.Repeat_Information[i].Repeat_Location << setw(25);
         cout << repeatAnswer.Repeat_Information[i].Repeat_Length << setw(18);
         cout << repeatAnswer.Repeat_Information[i].Repeat_Times << setw(17);
         if(repeatAnswer.Repeat_Information[i].Repeat_Whether_Reverse)
