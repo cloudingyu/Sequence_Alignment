@@ -2,6 +2,7 @@
 #define REPEAT_H
 
 #include<iostream>
+#include<vector>
 using namespace std;
 
 
@@ -18,8 +19,9 @@ class Repeat_Information
 class Repeat_All_Information
 {
     public:
-        Repeat_Information *Repeat_Information;
+        vector<Repeat_Information> Repeat_Information;
         int Repeat_Information_Number = 0;
+
 };
 
 Repeat_All_Information Repeat_Process(string reference,string query);
