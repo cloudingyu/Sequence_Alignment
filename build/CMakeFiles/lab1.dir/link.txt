@@ -1,1 +1,0 @@
-/usr/bin/clang++ -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/lab1.dir/lab1/src/lab1.cpp.o CMakeFiles/lab1.dir/lab1/src/HeadFile/repeat.cpp.o -o /Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Algorithm_design_and_analysis_project/lab1/bin/lab1
