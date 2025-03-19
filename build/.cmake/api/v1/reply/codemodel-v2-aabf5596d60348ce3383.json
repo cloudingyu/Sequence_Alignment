@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "DNA_Analysis",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "lab1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-lab1-Debug-82f56a56f0c4eaba43b5.json",
+					"name" : "lab1",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/chenjane/Desktop/\u8ba1\u7b97\u673a\u79d1\u5b66\u4e0e\u6280\u672f/\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790/Algorithm_design_and_analysis_project/build",
+		"source" : "/Users/chenjane/Desktop/\u8ba1\u7b97\u673a\u79d1\u5b66\u4e0e\u6280\u672f/\u7b97\u6cd5\u8bbe\u8ba1\u4e0e\u5206\u6790/Algorithm_design_and_analysis_project"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
