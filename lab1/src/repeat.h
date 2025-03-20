@@ -6,26 +6,24 @@
 using namespace std;
 
 
-class Repeat_Information
+class Repeat_Segment
 {
     public:
-        string Repeat_String;
-        int Repeat_Location;
-        int Repeat_Length;
-        int Repeat_Times;
-        bool Repeat_Whether_Reverse;
+        string sequence;
+        int location;
+        int length;
+        int repetitionCount;
+        bool isReversed;
 };
 
-class Repeat_All_Information
+class Repeat_Collection 
 {
     public:
-        vector<Repeat_Information> Repeat_Information;
-        int Repeat_Information_Number = 0;
-
+        vector<Repeat_Segment> segments;
+        int count = 0;
+    public:
+        void printResults();
+        void analyzeRepeats(string reference, string query);
 };
-
-Repeat_All_Information Repeat_Process(string reference,string query);
-
-void Print_Repeat_Information(Repeat_All_Information repeatAnswer);
 
 #endif

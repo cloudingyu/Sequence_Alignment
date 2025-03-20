@@ -1,6 +1,6 @@
-#include"repeat.h"
-#include<iostream>
-#include<fstream>
+#include "repeat.h"
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 int main()
@@ -25,7 +25,9 @@ int main()
         return 1;
     }
 
-    Print_Repeat_Information(Repeat_Process(reference,query));
+    Repeat_Collection results;
+    results.analyzeRepeats(reference, query);
+    results.printResults();
 
     return 0;
 }
