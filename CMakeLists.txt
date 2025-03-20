@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Lab1 代码编译
 add_executable(lab1
     lab1/src/lab1.cpp
-    lab1/src/HeadFile/repeat.cpp
+    lab1/src/repeat.cpp
 )
 
 # 设置头文件路径

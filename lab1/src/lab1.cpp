@@ -1,4 +1,4 @@
-#include"HeadFile/repeat.h"
+#include"repeat.h"
 #include<iostream>
 #include<fstream>
 using namespace std;
