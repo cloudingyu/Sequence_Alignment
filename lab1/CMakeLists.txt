@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(lab1
     src/lab1.cpp
     src/repeat.cpp
+    src/stringProcess.cpp
 )
 
 target_include_directories(lab1 PRIVATE 

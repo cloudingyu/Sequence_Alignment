@@ -5,7 +5,7 @@
 ## 项目结构
 
 ```
-Algorithm_design_and_analysis_project/
+Sequent_Alignment/
 ├── lab1/                   # Lab1 - DNA重复序列分析
 │   ├── bin/                # 编译后的可执行文件目录
 │   ├── sequence/           # 存放DNA序列输入文件

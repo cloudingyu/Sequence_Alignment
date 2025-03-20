@@ -53,8 +53,8 @@
 int main() 
 {
     // 读取参考序列和查询序列
-    string reference = "ACGTACGTACGT";
-    string query = "ACGTACGT";
+    string reference = "...";
+    string query = "...";
     
     // 创建重复序列集合对象
     Repeat_Collection results;
