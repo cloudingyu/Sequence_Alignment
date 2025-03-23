@@ -1,5 +1,5 @@
 #include "repeat.h"
-#include"stringProcess.h"
+#include "stringProcess.h"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -25,6 +25,6 @@ void Repeat_Collection::printResults()
 // 分析重复序列
 void Repeat_Collection::analyzeRepeats(const string &reference, const string &query)
 {
-    cout<<"Helloworld!"<<endl;
+    
     return;
 }

@@ -41,9 +41,42 @@ string reverseComplement(const string &str)
     return reverse(result);
 }
 
-// 判断str1的[l1,r1]是否包含str2的[l2,r2]
-int subString(const string &str1, int l1, int r1, const string &str2, int l2, int r2)
+// 判断 text的[textBegin,textEnd]是否包含 pattern的[patternBegin,patternEnd],返回在 text中出现的初始位置
+vector<int> subString(const string &text, const string &pattern, int textBegin, int textEnd, int patternBegin, int patternEnd)
 {
+    vector<int> result;
+    if (textEnd == 0)
+        textEnd = text.length() - 1;
+    if (patternEnd == 0)
+        patternEnd = pattern.length() - 1;
+    int textLength = textEnd - textBegin + 1;
+    int patternLength = patternEnd - patternBegin + 1;
 
-    return 0;
+    vector<int> next(patternLength, 0);
+
+    for (int i = 1; i < patternLength; i++)
+    {
+        int j = next[i - 1];
+        while (j > 0 && pattern[patternBegin + i] != pattern[patternBegin + j])
+            j = next[j - 1];
+        if (pattern[patternBegin + i] == pattern[patternBegin + j])
+            j++;
+        next[i] = j;
+    }
+
+
+    int j = 0;
+    for (int i = textBegin; i <= textEnd; i++)
+    {
+        while (j > 0 && text[i] != pattern[patternBegin + j])
+            j = next[j - 1];
+        if (text[i] == pattern[patternBegin + j])
+            j++;
+        if (j == patternLength)
+        {
+            result.push_back(i - patternLength + 1);
+            j = next[j - 1];
+        }
+    }
+    return result;
 }

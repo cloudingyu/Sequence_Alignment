@@ -19,7 +19,9 @@ int main()
 
     // 主逻辑
     Repeat_Collection results;
+
     results.analyzeRepeats(reference, query);
+    
     results.printResults();
 
     return 0;
