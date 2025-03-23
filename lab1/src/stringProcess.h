@@ -1,6 +1,7 @@
 #ifndef STRING_PROCESS_H
 #define STRING_PROCESS_H
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // 返回反转后的字符串

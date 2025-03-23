@@ -1,5 +1,6 @@
 #include "stringProcess.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // 反转字符串

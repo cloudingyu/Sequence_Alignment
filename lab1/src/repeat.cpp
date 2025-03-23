@@ -2,6 +2,7 @@
 #include "stringProcess.h"
 #include <iostream>
 #include <iomanip>
+#include <vector>
 using namespace std;
 
 // 按照规定格式输出所有重复序列信息
