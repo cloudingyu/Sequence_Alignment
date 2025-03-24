@@ -5,6 +5,16 @@
 #include <vector>
 using namespace std;
 
+// 记录重复信息
+void Repeat_Segment::recordSegment(string const &seq, int loc, int len, int cnt, bool rev)
+{
+    sequence = seq;
+    location = loc;
+    length = len;
+    repetitionCount = cnt;
+    isReversed = rev;
+}
+
 // 按照规定格式输出所有重复序列信息
 void Repeat_Collection::printResults()
 {
@@ -26,6 +36,9 @@ void Repeat_Collection::printResults()
 // 分析重复序列
 void Repeat_Collection::analyzeRepeats(const string &reference, const string &query)
 {
-    
+    Repeat_Segment segment("ATCG", 10, 4, 3, false);
+    segments.push_back(segment);
+    segment.recordSegment("GCTA", 20, 4, 2, true);
+    segments.push_back(segment);
     return;
 }

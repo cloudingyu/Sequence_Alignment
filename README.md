@@ -5,25 +5,29 @@
 ## 项目结构
 
 ```
-Sequent_Alignment/
-├── lab1/                   # Lab1 - DNA重复序列分析
-│   ├── bin/                # 编译后的可执行文件目录
-│   ├── sequence/           # 存放DNA序列输入文件
-│   │   ├── reference.in    # 参考DNA序列文件
-│   │   └── query.in        # 查询DNA序列文件
-│   ├── src/                # 源代码目录
-│   │   ├── lab1.cpp        # 主程序入口
-│   │   ├── repeat.cpp      # 重复序列分析实现
-│   │   └── repeat.h        # 重复序列分析头文件
-│   └── CMakeLists.txt      # CMake构建配置文件
-├── lab2/                   # Lab2 - 待添加
-├── lab3/                   # Lab3 - 待添加
-└── ...                     # 更多实验
+Sequence Alignment/
+├── lab1/                       # Lab1 - DNA重复序列分析
+│   ├── bin/                    # 编译后的可执行文件目录
+│   ├── src/                    # 源代码目录
+│   │   ├── lab1main.cpp        # 主程序入口
+│   │   ├── repeat.cpp          # 重复序列分析实现
+│   │   ├── repeat.h
+│   │   ├── stringProcess.cpp   # 字符串处理实现
+│   │   └── stringProcess.h
+│   ├── sequence/               # 序列数据文件夹
+│   │   ├── reference.in
+│   │   └── query.in
+│   └── CMakeLists.txt          # CMake构建配置文件
+├── build/                      # 构建目录
+│   └── ...
+├── lab2/
+├── lab3/
+└── README.md               # 项目说明文档
 ```
 
 ## 前提条件
 
-在编译运行项目前，请确保已安装以下软件：
+在编译运行项目前，请确保已处理好以下配置：
 
 ### Windows
 - [MinGW-w64](https://www.mingw-w64.org/downloads/) - C++编译器

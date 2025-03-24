@@ -1,10 +1,19 @@
 #include "stringProcess.h"
 #include <iostream>
 #include <vector>
+#include <string.h>
 using namespace std;
 
+
+// 返回子串
+string subStr(const string &str, int l, int r)
+{
+    string result = str.substr(l, r - l + 1);
+    return result;
+}
+
 // 反转字符串
-string reverse(const string &str)
+string reverseStr(const string &str)
 {
     string result = str;
     int length = str.length();
@@ -18,7 +27,7 @@ string reverse(const string &str)
 }
 
 // 碱基互补配对反转字符串
-string reverseComplement(const string &str)
+string complementStr(const string &str)
 {
     string result = str;
     int length = str.length();
@@ -39,43 +48,36 @@ string reverseComplement(const string &str)
             result[i] = 'C';
             break;
         }
-    return reverse(result);
+    return result;
 }
 
-// 判断 text的[textBegin,textEnd]是否包含 pattern的[patternBegin,patternEnd],返回在 text中出现的初始位置
-vector<int> subString(const string &text, const string &pattern, int textBegin, int textEnd, int patternBegin, int patternEnd)
+// 判断 pattern 是否为 text 的子串,返回在 text 中出现的初始位置
+vector<int> containStr(const string &text, const string &pattern)
 {
     vector<int> result;
-    if (textEnd == 0)
-        textEnd = text.length() - 1;
-    if (patternEnd == 0)
-        patternEnd = pattern.length() - 1;
-    int textLength = textEnd - textBegin + 1;
-    int patternLength = patternEnd - patternBegin + 1;
 
-    vector<int> next(patternLength, 0);
+    vector<int> next(pattern.length(), 0);
 
-    for (int i = 1; i < patternLength; i++)
+    for (int i = 1; i < pattern.length(); i++)
     {
         int j = next[i - 1];
-        while (j > 0 && pattern[patternBegin + i] != pattern[patternBegin + j])
+        while (j > 0 && pattern[i] != pattern[j])
             j = next[j - 1];
-        if (pattern[patternBegin + i] == pattern[patternBegin + j])
+        if (pattern[i] == pattern[j])
             j++;
         next[i] = j;
     }
 
-
     int j = 0;
-    for (int i = textBegin; i <= textEnd; i++)
+    for (int i = 0; i < text.length(); i++)
     {
-        while (j > 0 && text[i] != pattern[patternBegin + j])
+        while (j > 0 && text[i] != pattern[j])
             j = next[j - 1];
-        if (text[i] == pattern[patternBegin + j])
+        if (text[i] == pattern[j])
             j++;
-        if (j == patternLength)
+        if (j == pattern.length())
         {
-            result.push_back(i - patternLength + 1);
+            result.push_back(i - pattern.length() + 1);
             j = next[j - 1];
         }
     }

@@ -1,4 +1,5 @@
 #include "repeat.h"
+#include "stringProcess.h"
 #include <iostream>
 #include <fstream>
 #include <string>

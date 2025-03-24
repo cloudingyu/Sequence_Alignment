@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(lab1
-    src/lab1.cpp
+    src/lab1main.cpp
     src/repeat.cpp
     src/stringProcess.cpp
 )
