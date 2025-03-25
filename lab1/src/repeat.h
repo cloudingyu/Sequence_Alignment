@@ -39,7 +39,7 @@ public:
     void printResults();
 
     // 分析重复序列
-    void analyzeRepeats(const string &reference, const string &query);
+    void analyzeRepeats(const string &reference, const string &query, int kmer_size);
 };
 
 #endif

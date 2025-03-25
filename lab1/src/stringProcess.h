@@ -17,7 +17,10 @@ string complementStr(const string &str);
 // 判断 pattern 是否为 text 的子串,返回在 text 中出现的初始位置
 vector<int> containStr(const string &text, const string &pattern);
 
-// 滚动哈希实现哈希匹配
-vector<vector<long long>> rollingHash(const string &text,int BASE = 5, int MOD = 1000000007);
+// 滚动哈希实现哈希值计算
+vector<long long> rollingHash(const string &str, int kmer_size = 1, int BASE = 5, int MOD = 1000000007);
+
+// 滚动哈希实现反向互补哈希值计算
+vector<long long> rollingRevHash(const string &str, int kmer_size = 1, int BASE = 5, int MOD = 1000000007);
 
 #endif

@@ -34,67 +34,24 @@ void Repeat_Collection::printResults()
 }
 
 // 分析重复序列
-void Repeat_Collection::analyzeRepeats(const string &reference, const string &query)
+void Repeat_Collection::analyzeRepeats(const string &reference, const string &query, int kmer_size)
 {
-    vector<vector<long long>> refeHashTable = rollingHash(reference);
-    vector<vector<long long>> querHashTable = rollingHash(query);
-    int refeLength = reference.length();
-    int querLength = query.length();
+    // 记录哈希简化后的长度
+    int refeLength = reference.length() - kmer_size + 1;
+    int querLength = query.length() - kmer_size + 1;
 
-    int head_quer = 0, tail_refe = 0, head_refe = 0;
+    // 计算 reference 串和 query 串的哈希值
+    vector<long long> refeHash = rollingHash(reference, kmer_size);
+    vector<long long> querHash = rollingHash(query, kmer_size);
 
-    // 寻找最长匹配前缀
-    while (reference[head_refe] == query[head_quer])
-    {
-        head_refe++;
-        head_quer++;
-    }
+    // 计算 reference 串的反向互补哈希值
+    // 若 querHashTable[i] == refeRevHashTable[j]
+    // 则 query[i..(i + kmer_size -1)] 与 reference[j..(j + kmer_size - 1)] 的反向互补
+    vector<long long> refeRevHash = rollingRevHash(reference, kmer_size);
 
-    while (head_quer < query.length())
-    {
-        // 记录当前重复匹配开始的位置
-        int pointer = head_quer;
+    
+    
+    
 
-        // 开始正向和反向匹配
-        while (1)
-        {
-            // 判断当前最长正向匹配
-            int max_len = -1;
-            for (int len = 0; tail_refe < head_refe - len && head_quer + len + 1 < refeLength; len++)
-                if (refeHashTable[head_refe - len][head_refe - 1] == querHashTable[head_quer][head_quer + len + 1])
-                    if (subStr(reference, head_refe - len, head_refe - 1) == subStr(query, head_quer, head_quer + len + 1))
-                        max_len = max(max_len, len);
-            if (max_len != -1)
-            {
-                int cnt = 1;
-                while (refeHashTable[head_refe - max_len][head_refe - 1] == querHashTable[head_quer + cnt * max_len][head_quer + max_len + 1 + cnt * max_len])
-                {
-                    if (subStr(reference, head_refe - max_len, head_refe - 1) != subStr(query, head_quer + cnt * max_len, head_quer + max_len + 1 + cnt * max_len))
-                        break;
-                    cnt++;
-                }
-                Repeat_Segment segment(subStr(reference, head_refe - max_len, head_refe - 1), head_refe - max_len, max_len, cnt, false);
-                segments.push_back(segment);
-                head_quer = head_quer + cnt * max_len + 1;
-                continue;
-            }
-
-            // 判断当前最长反向匹配
-            /*int max_len_rev = -1;
-
-            if (max_len_rev != -1)
-            {
-
-            }*/
-            break;
-        }
-        tail_refe = head_refe - 1;
-        head_quer = pointer;
-        while (reference[head_refe] == query[head_quer] && head_refe < refeLength && head_quer < querLength)
-        {
-            head_refe++;
-            head_quer++;
-        }
-    }
     return;
 }
