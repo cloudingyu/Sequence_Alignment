@@ -18,11 +18,17 @@ int main()
     if (queryFile.is_open()){getline(queryFile, query);queryFile.close();}
     else{cerr << "Error to read query.in" << endl;return 1;}
 
+    // 定义并初始化重复序列处理器
+    Repeater results;
+    results.reference = reference;
+    results.query = query;
+    results.kmer_size = 1;
 
-    // 主逻辑
-    Repeat_Collection results;
+    results.prepAnalyze();
 
-    results.analyzeRepeats(reference, query, 1);
+    results.analyzeRoute();
+
+    results.analyzeRepeats();
     
     results.printResults();
 

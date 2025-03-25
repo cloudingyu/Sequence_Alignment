@@ -18,9 +18,6 @@ string complementStr(const string &str);
 vector<int> containStr(const string &text, const string &pattern);
 
 // 滚动哈希实现哈希值计算
-vector<long long> rollingHash(const string &str, int kmer_size = 1, int BASE = 5, int MOD = 1000000007);
-
-// 滚动哈希实现反向互补哈希值计算
-vector<long long> rollingRevHash(const string &str, int kmer_size = 1, int BASE = 5, int MOD = 1000000007);
+vector<vector<int>> rollingHash(const string &str, int BASE = 5, int MOD = 1000000007);
 
 #endif
