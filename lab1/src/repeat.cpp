@@ -7,7 +7,7 @@
 using namespace std;
 
 // 参数: 维持, 新开, 反向维持, 反向新开
-const int alignScore = 5, newScore = -1, alignRevScore = 3, newRevScore = -5;
+const int alignScore = 1, newScore = -5, alignRevScore = 9, newRevScore = -1;
 
 const int MIN_INF = -2147483648;
 
@@ -61,10 +61,12 @@ void Repeat_Collection::analyzeRepeats(const string &reference, const string &qu
     // 记录第 i 个碱基对所对应的得分最大值
     vector<pair<long long, pair<int, int>>> maxScoreMap(querLength, {MIN_INF, {0, 0}});
 
+    vector<int> maxScoreIndex(querLength, 0);
+
     // 初始化 query 第 [0] 个碱基的匹配情况
     scoreMap[0][0] = alignScore;
     prevMap[0][0] = {-1, -1};
-    maxScoreMap[0] = {alignScore, {-1, -1}};
+    maxScoreIndex[0] = 0;
 
     // 主循环,遍历每一个 query 碱基可以匹配的正向和反向 reference
     for (int i = 1; i < querLength; i++)
@@ -73,38 +75,54 @@ void Repeat_Collection::analyzeRepeats(const string &reference, const string &qu
             // 考虑正向匹配
             if (querHash[i] == refeHash[j])
             {
-                scoreMap[i][j] = scoreMap[i - 1][j - 1] + alignScore;
-                prevMap[i][j] = {i - 1, j - 1};
+                // 新开序列得分
+                scoreMap[i][j] = maxScoreMap[i - 1].first + alignScore + newScore ;
+                prevMap[i][j] = make_pair(i - 1, maxScoreIndex[i - 1]);
 
-                if (maxScoreMap[i - 1].first + alignScore + newScore > scoreMap[i][j])
+                // 继续延续得分
+                if (scoreMap[i - 1][j - 1] + alignScore >= scoreMap[i][j] && refeHash[j - 1] == querHash[i - 1])
                 {
-                    scoreMap[i][j] = maxScoreMap[i - 1].first + alignScore + newScore;
-                    prevMap[i][j] = maxScoreMap[i - 1].second;
+                    scoreMap[i][j] = scoreMap[i - 1][j - 1] + alignScore;
+                    prevMap[i][j] = {i - 1, j - 1};
+                }
+                if (maxScoreMap[i].first < scoreMap[i][j])
+                {
+                    maxScoreMap[i] = {scoreMap[i][j], prevMap[i][j]};
+                    maxScoreIndex[i] = j;
                 }
             }
             /*
             // 考虑反向匹配
             else if (querHash[i] == refeRevHash[j])
             {
-                scoreMap[i][j] = scoreMap[i - 1][j + 1] + newRevScore;
-                prevMap[i][j] = {i - 1, j + 1};
+                scoreMap[i][j] = maxScoreMap[i - 1].first + alignRevScore + newRevScore - abs(j - maxScoreIndex[i - 1]);
+                prevMap[i][j] = make_pair(i - 1, maxScoreIndex[i - 1]);
 
-                if (maxScoreMap[i - 1].first + alignRevScore + newRevScore > scoreMap[i][j])
+                if (scoreMap[i - 1][j + 1] + alignRevScore >= scoreMap[i][j] && refeRevHash[j + 1] == querHash[i - 1])
                 {
-                    scoreMap[i][j] = maxScoreMap[i - 1].first + alignRevScore + newRevScore;
-                    prevMap[i][j] = maxScoreMap[i - 1].second;
+                    scoreMap[i][j] = scoreMap[i - 1][j + 1] + alignRevScore;
+                    prevMap[i][j] = {i - 1, j + 1};
+                }
+                if (maxScoreMap[i].first <= scoreMap[i][j])
+                {
+                    maxScoreMap[i] = {scoreMap[i][j], prevMap[i][j]};
+                    maxScoreIndex[i] = j;
                 }
             }
             */
-            if (maxScoreMap[i].first < scoreMap[i][j])
-                maxScoreMap[i] = {scoreMap[i][j], prevMap[i][j]};
         }
-
     cout << "equalMap" << endl;
     for (int i = refeLength - 1; i >= 0; i--)
     {
         for (int j = 0; j < querLength; j++)
-            cout << setw(3) << (bool)(refeHash[i] == querHash[j]) << " ";
+            cout << setw(3) << ((refeHash[i] == querHash[j]) ? '*' : ' ');
+        cout << endl;
+    }
+    cout << "complementMap" << endl;
+    for (int i = refeLength - 1; i >= 0; i--)
+    {
+        for (int j = 0; j < querLength; j++)
+            cout << setw(3) << ((refeRevHash[i] == querHash[j]) ? '*' : ' ');
         cout << endl;
     }
 
@@ -116,24 +134,23 @@ void Repeat_Collection::analyzeRepeats(const string &reference, const string &qu
         cout << endl;
     }
 
-
-    for(int i=0;i<querLength;i++)
-        cout<<i<<" "<<maxScoreMap[i].first<<" "<<maxScoreMap[i].second.first<<" "<<maxScoreMap[i].second.second<<endl;
-
+    for (int i = 0; i < querLength; i++)
+        cout << i << " " << maxScoreMap[i].first << " " << maxScoreMap[i].second.first << " " << maxScoreMap[i].second.second << endl;
 
     cout << "map" << endl;
+    
     vector<vector<int>> map(querLength, vector<int>(refeLength, 0));
-    for(int i=0;i<querLength-1;i++)
-        map[maxScoreMap[i+1].second.first][maxScoreMap[i+1].second.second] = 1;
-    map[querLength-1][refeLength-1] = 1;
-    for(int i = refeLength - 1; i >= 0; i--)
+    for (int i = 0; i < querLength - 1; i++)
+        map[maxScoreMap[i + 1].second.first][maxScoreMap[i + 1].second.second] = 1;
+    map[querLength - 1][refeLength - 1] = 1;
+    for (int i = refeLength - 1; i >= 0; i--)
     {
-        for(int j = 0; j < querLength; j++)
+        for (int j = 0; j < querLength; j++)
         {
-            if(map[j][i] == 1)
-                cout << "*";
+            if (map[j][i] == 1)
+                cout << setw(3) << "0";
             else
-                cout << " ";
+                cout << setw(3) << " ";
         }
         cout << endl;
     }

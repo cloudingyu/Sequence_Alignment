@@ -18,6 +18,7 @@ int main()
     if (queryFile.is_open()){getline(queryFile, query);queryFile.close();}
     else{cerr << "Error to read query.in" << endl;return 1;}
 
+
     // 主逻辑
     Repeat_Collection results;
 
