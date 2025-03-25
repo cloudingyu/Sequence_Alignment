@@ -18,6 +18,7 @@ int main()
     if (queryFile.is_open()){getline(queryFile, query);queryFile.close();}
     else{cerr << "Error to read query.in" << endl;return 1;}
 
+    freopen("output.out","w",stdout);
     // 定义并初始化重复序列处理器
     Repeater results;
     results.reference = reference;

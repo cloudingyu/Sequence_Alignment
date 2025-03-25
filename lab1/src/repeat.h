@@ -63,6 +63,7 @@ public:
     {
         double maxScore;
         int prevIndex;
+        int continuousCount;
     };
     vector<vector<Align_Point>> Align;
 
