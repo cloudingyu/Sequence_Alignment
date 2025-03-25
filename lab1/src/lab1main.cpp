@@ -21,7 +21,7 @@ int main()
     // 主逻辑
     Repeat_Collection results;
 
-    results.analyzeRepeats(reference, query, 3);
+    results.analyzeRepeats(reference, query, 1);
     
     results.printResults();
 
