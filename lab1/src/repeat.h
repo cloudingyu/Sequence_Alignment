@@ -77,6 +77,12 @@ public:
         int prevIndex;
     };
     vector<Max_Point> querAlign;
+    vector<Max_Point> pointRoute;
+
+    // 记录最优选择
+    vector<vector<int>> Route;
+
+
 
 
 public:

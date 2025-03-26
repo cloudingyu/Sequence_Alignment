@@ -31,6 +31,15 @@ void Repeater::prepAnalyze()
         querAlign.push_back({MIN_INF, -1, -1});
     querAlign[0] = {0, 0, -1};
 
+    for (int i = 0; i < querLength; i++)
+    {
+        vector<int> temp;
+        for (int j = 0; j < refeLength; j++)
+            temp.push_back(MIN_INF);
+        Route.push_back(temp);
+    }
+    for (int i = 0; i < querLength; i++)
+        pointRoute.push_back({0, -1, 0});
     return;
 }
 
@@ -64,7 +73,6 @@ void Repeater::analyzeRoute()
                 if (j - 1 >= 0 && isEqual(i - 1, j - 1))
                     if (Align[i][j].maxScore < Align[i - 1][j - 1].maxScore + maintainScore + Align[i - 1][j - 1].continuousCount * continuousScore)
                         Align[i][j] = {Align[i - 1][j - 1].maxScore + maintainScore + Align[i - 1][j - 1].continuousCount * continuousScore, j - 1, Align[i - 1][j - 1].continuousCount + 1};
-                        
 
                 if (querAlign[i].maxScore < Align[i][j].maxScore)
                     querAlign[i] = {Align[i][j].maxScore, j, Align[i][j].prevIndex};
@@ -90,15 +98,16 @@ void Repeater::analyzeRoute()
 // 分析重复序列
 void Repeater::analyzeRepeats()
 {
-    vector<vector<int>> Route(querLength, vector<int>(refeLength, -1));
+
     int h = querLength - 1, l = refeLength - 1;
     while (h >= 0 && l >= 0)
     {
-
         Route[h][l] = Align[h][l].maxScore;
+        pointRoute[h] = {Align[h][l].maxScore, l, Align[h][l].prevIndex};
         l = Align[h][l].prevIndex;
         h--;
     }
+    /*
     for (int j = refeLength - 1; j >= 0; j--)
     {
         for (int i = 0; i < querLength; i++)
@@ -112,23 +121,46 @@ void Repeater::analyzeRepeats()
         }
         cout << endl;
     }
-    for(int i=0;i<querLength;i++)
+    */
+
+    int head = 0;
+    while (head < querLength)
     {
-        for(int j=0;j<refeLength;j++)
+        int tail = head + 1;
+        // cout << tail << " " << Align[tail][pointRoute[tail].maxScoreIndex].continuousCount << endl;
+        while (tail < querLength && abs(Align[tail][pointRoute[tail].maxScoreIndex].continuousCount) != 1)
+            tail++;
+        if (isMatch(head, pointRoute[head].maxScoreIndex))
         {
-            if(Route[i][j] > 0)
-            {
-                if(Align[i][j].prevIndex == -1)
-                {
-                    int h=i,l=j;
-                    
-                    segments.push_back({i,j,Align[i][j].continuousCount,Align[i][j].maxScore,0});
-                }
-            }
+            Repeat_Segment temp(subStr(query, head, tail - 1), pointRoute[head].maxScoreIndex, tail - head, 1, isMatch(head, pointRoute[head].maxScoreIndex));
+            segments.push_back(temp);
         }
+        else
+        {
+            Repeat_Segment temp(subStr(query, head, tail - 1), pointRoute[head].maxScoreIndex + tail - head, tail - head, 1, isMatch(head, pointRoute[head].maxScoreIndex));
+            segments.push_back(temp);
+        }
+
+        head = tail;
     }
 
-    return;
+    for (int i = segments.size(); i > 0; i--)
+        for (int j = 0; j < i; j++)
+            if (abs(segments[i].location - segments[j].location) < 10 && abs(segments[i].length - segments[j].length) < 10 && segments[i].isReversed == segments[j].isReversed)
+            {
+                segments[j].repetitionCount++;
+                segments.erase(segments.begin() + i);
+                break;
+            }
+    
+    for (int i = segments.size() - 1; i >= 0; i--)
+    {
+        if (segments[i].repetitionCount == 1)
+        {
+            segments.erase(segments.begin() + i);
+        }
+    }
+    return ;
 }
 
 // 按照规定格式输出所有重复序列信息
