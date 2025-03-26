@@ -98,7 +98,7 @@ void Repeater::analyzeRoute()
 // 分析重复序列
 void Repeater::analyzeRepeats()
 {
-
+    // 回溯得到最优路径
     int h = querLength - 1, l = refeLength - 1;
     while (h >= 0 && l >= 0)
     {
@@ -107,27 +107,12 @@ void Repeater::analyzeRepeats()
         l = Align[h][l].prevIndex;
         h--;
     }
-    /*
-    for (int j = refeLength - 1; j >= 0; j--)
-    {
-        for (int i = 0; i < querLength; i++)
-        {
-            if (Route[i][j] < 0)
-                cout << "  ";
-            else if (Align[i][j].continuousCount == 1)
-                cout << 11;
-            else
-                cout << "00";
-        }
-        cout << endl;
-    }
-    */
 
+    // 通过 continuousCount 判断所有连续序列
     int head = 0;
     while (head < querLength)
     {
         int tail = head + 1;
-        // cout << tail << " " << Align[tail][pointRoute[tail].maxScoreIndex].continuousCount << endl;
         while (tail < querLength && abs(Align[tail][pointRoute[tail].maxScoreIndex].continuousCount) != 1)
             tail++;
         if (isMatch(head, pointRoute[head].maxScoreIndex))
@@ -144,6 +129,7 @@ void Repeater::analyzeRepeats()
         head = tail;
     }
 
+    // 删去重复的片段(模糊匹配)
     for (int i = segments.size(); i > 0; i--)
         for (int j = 0; j < i; j++)
             if (abs(segments[i].location - segments[j].location) < 10 && abs(segments[i].length - segments[j].length) < 10 && segments[i].isReversed == segments[j].isReversed)
@@ -152,7 +138,6 @@ void Repeater::analyzeRepeats()
                 segments.erase(segments.begin() + i);
                 break;
             }
-    
     for (int i = segments.size() - 1; i >= 0; i--)
     {
         if (segments[i].repetitionCount == 1)
