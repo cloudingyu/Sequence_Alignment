@@ -26,13 +26,16 @@ public:
     // 是否反向
     bool isReversed;
 
+    // 起始、终止位置
+    int begin,endd;
+
 public:
     // 默认构造函数
-    Repeat_Segment() : sequence(""), location(0), length(0), repetitionCount(0), isReversed(false) {}
+    Repeat_Segment() : sequence(""), location(0), length(0), repetitionCount(0), isReversed(false) ,begin(0),endd(0){}
     
     // 带参构造函数
-    Repeat_Segment(const string &seq, int loc, int len, int cnt, bool rev) : 
-        sequence(seq), location(loc), length(len), repetitionCount(cnt), isReversed(rev) {}
+    Repeat_Segment(const string &seq, int loc, int len, int cnt, bool rev,int beg,int end) : 
+        sequence(seq), location(loc), length(len), repetitionCount(cnt), isReversed(rev) ,begin(beg),endd(end){}
 };
 
 // 重复序列处理器
@@ -92,15 +95,21 @@ public:
     // 比对函数
     bool isEqual(int i,int j);
 
-    // 比对函数
+    // 比对函数(反向互补)
     bool isMatch(int i,int j);
 
     // 分析最优路径
     void analyzeRoute();
 
-    // 分析重复序列
-    void analyzeRepeats();
+    // 提取连续子串
+    void analyzeSequence();
 
+    // 删去与原字符串相同的部分, 合并相同子串(模糊处理)
+    void eraseSequence();
+
+    // 绘制比对演示图像
+    void drawSequence();
+    
     // 按照规定格式输出所有重复序列信息
     void printResults();
 };

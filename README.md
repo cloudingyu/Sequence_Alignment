@@ -6,23 +6,29 @@
 
 ```
 Sequence Alignment/
-├── lab1/                       # Lab1 - DNA重复序列分析
-│   ├── bin/                    # 编译后的可执行文件目录
-│   ├── src/                    # 源代码目录
+├── lab1/               # Lab1 - DNA重复序列分析
+│   ├── bin/                # 编译后的可执行文件目录
+│   │   └── ...
+│   ├── src/                # 源代码目录
+│   │   ├── drawer.py           # 演示图像程序
+│   │   ├── alignment.png       # 演示图像文件
 │   │   ├── lab1main.cpp        # 主程序入口
 │   │   ├── repeat.cpp          # 重复序列分析实现
 │   │   ├── repeat.h
 │   │   ├── stringProcess.cpp   # 字符串处理实现
 │   │   └── stringProcess.h
-│   ├── sequence/               # 序列数据文件夹
+│   ├── sequence/           # 序列数据文件夹
 │   │   ├── reference.in
 │   │   └── query.in
-│   └── CMakeLists.txt          # CMake构建配置文件
-├── build/                      # 构建目录
+│   ├── CMakeLists.txt      # CMake构建配置文件
+│   ├── Lab1.pdf  
+│   ├── repeat.md           # repeat.h 函数说明
+│   └── stringProcess.md    # stringProcess.h 函数说明
+├── build/               # 构建目录
 │   └── ...
 ├── lab2/
 ├── lab3/
-└── README.md               # 项目说明文档
+└── README.md            # 项目说明文档
 ```
 
 ## 前提条件

@@ -5,7 +5,6 @@
 #include <string>
 
 using namespace std;
-using namespace std::chrono;
 
 int main()
 {
@@ -25,12 +24,22 @@ int main()
     results.query = query;
     results.kmer_size = 1;
     
+    // 预处理函数
     results.prepAnalyze();
-    
+
+    // 分析最优路径
     results.analyzeRoute();
     
-    results.analyzeRepeats();
+    // 提取连续子串
+    results.analyzeSequence();
+
+    // 绘制比对演示图像
+    results.drawSequence();
+
+    // 删去与原字符串相同的部分, 合并相同子串(模糊处理)
+    results.eraseSequence();
     
+    // 按照规定格式输出所有重复序列信息
     results.printResults();
 
     return 0;
