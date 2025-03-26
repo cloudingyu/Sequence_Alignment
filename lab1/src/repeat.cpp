@@ -6,8 +6,8 @@
 #include <limits>
 using namespace std;
 
-// 参数: 维持, 新开, 反向维持, 反向新开
-const double alignScore = 5, newScore = -1, alignRevScore = 5, newRevScore = -1, continousScore = 1;
+// 参数: 维持, 新开, 反向维持, 反向新开, 连续得分
+const double maintainScore = 50, newScore = -10, maintainRevScore = 49, newRevScore = -10, continuousScore = 1;
 
 // 预处理函数
 void Repeater::prepAnalyze()
@@ -25,7 +25,7 @@ void Repeater::prepAnalyze()
             temp.push_back({MIN_INF, -1, 0});
         Align.push_back(temp);
     }
-    Align[0][0] = {0, -1,1};
+    Align[0][0] = {0, -1, 1};
 
     for (int i = 0; i < querLength; i++)
         querAlign.push_back({MIN_INF, -1, -1});
@@ -43,7 +43,7 @@ bool Repeater::isEqual(int i, int j)
 // 比对函数
 bool Repeater::isMatch(int i, int j)
 {
-    return querHash[i][i + kmer_size - 1] == refeRevHash[refeLength - j - kmer_size][refeLength - j - 1];
+    return querHash[i][i + kmer_size - 1] == refeRevHash[refeLength - j - 1][refeLength - j + kmer_size - 2];
 }
 
 // 分析重复序列
@@ -52,21 +52,20 @@ void Repeater::analyzeRoute()
 
     // 主循环,遍历每一个 query 碱基可以匹配的正向和反向 reference
     for (int i = 1; i < querLength; i++)
-        for (int j = 1; j < refeLength; j++)
+        for (int j = 0; j < refeLength; j++)
         {
             // 考虑正向匹配
             if (isEqual(i, j))
             {
                 // 新开序列得分
-                Align[i][j] = {querAlign[i - 1].maxScore + alignScore + newScore, querAlign[i - 1].maxScoreIndex, 1};
+                Align[i][j] = {querAlign[i - 1].maxScore + maintainScore + newScore, querAlign[i - 1].maxScoreIndex, 1};
 
                 // 继续延续得分
-                if (isEqual(i - 1, j - 1))
-                    if (Align[i][j].maxScore < Align[i - 1][j - 1].maxScore + alignScore + Align[i - 1][j - 1].continuousCount * continousScore)
-                    {
-                        Align[i][j] = {Align[i - 1][j - 1].maxScore + alignScore+ Align[i - 1][j - 1].continuousCount * continousScore, j - 1};
-                        Align[i][j].continuousCount = Align[i - 1][j - 1].continuousCount + 1;
-                    }
+                if (j - 1 >= 0 && isEqual(i - 1, j - 1))
+                    if (Align[i][j].maxScore < Align[i - 1][j - 1].maxScore + maintainScore + Align[i - 1][j - 1].continuousCount * continuousScore)
+                        Align[i][j] = {Align[i - 1][j - 1].maxScore + maintainScore + Align[i - 1][j - 1].continuousCount * continuousScore, j - 1, Align[i - 1][j - 1].continuousCount + 1};
+                        
+
                 if (querAlign[i].maxScore < Align[i][j].maxScore)
                     querAlign[i] = {Align[i][j].maxScore, j, Align[i][j].prevIndex};
             }
@@ -74,20 +73,16 @@ void Repeater::analyzeRoute()
             else if (isMatch(i, j))
             {
                 // 新开序列得分
-                Align[i][j] = {querAlign[i - 1].maxScore + alignRevScore + newRevScore, querAlign[i - 1].maxScoreIndex, 1};
+                Align[i][j] = {querAlign[i - 1].maxScore + maintainRevScore + newRevScore, querAlign[i - 1].maxScoreIndex, 1};
 
                 // 继续延续得分
                 if (j + 1 < refeLength && isMatch(i - 1, j + 1))
-                    if (Align[i][j].maxScore < Align[i - 1][j + 1].maxScore + alignRevScore + Align[i - 1][j + 11].continuousCount * continousScore)
-                    {
-                        Align[i][j] = {Align[i - 1][j + 1].maxScore + alignRevScore+ Align[i - 1][j + 1].continuousCount * continousScore, j + 1};
-                        Align[i][j].continuousCount = Align[i - 1][j + 1].continuousCount + 1;
-                    }
+                    if (Align[i][j].maxScore < Align[i - 1][j + 1].maxScore + maintainRevScore + Align[i - 1][j + 1].continuousCount * continuousScore)
+                        Align[i][j] = {Align[i - 1][j + 1].maxScore + maintainRevScore + Align[i - 1][j + 1].continuousCount * continuousScore, j + 1, Align[i - 1][j + 1].continuousCount + 1};
+
                 if (querAlign[i].maxScore <= Align[i][j].maxScore)
                     querAlign[i] = {Align[i][j].maxScore, j, Align[i][j].prevIndex};
             }
-            // 重新计入 querAlign[i] 的最大得分
-
         }
     return;
 }
@@ -95,16 +90,6 @@ void Repeater::analyzeRoute()
 // 分析重复序列
 void Repeater::analyzeRepeats()
 {
-    for (int j = refeLength - 1; j >= 0; j--)
-    {
-        for (int i = 0; i < querLength; i++)
-            if (Align[i][j].maxScore == MIN_INF)
-                cout << setw(4) << '_';
-            else
-                cout << setw(4) << Align[i][j].maxScore;
-        cout << endl;
-    }
-
     vector<vector<int>> Route(querLength, vector<int>(refeLength, -1));
     int h = querLength - 1, l = refeLength - 1;
     while (h >= 0 && l >= 0)
@@ -117,23 +102,31 @@ void Repeater::analyzeRepeats()
     for (int j = refeLength - 1; j >= 0; j--)
     {
         for (int i = 0; i < querLength; i++)
-            if (Route[i][j] == -1)
-                cout << setw(4) << '_';
-            else
-                cout << setw(4) << Route[i][j];
-        cout << endl;
-    }
-
-    for (int j = refeLength - 1; j >= 0; j--)
-    {
-        for (int i = 0; i < querLength; i++)
-            if (Route[i][j] == -1)
+        {
+            if (Route[i][j] < 0)
                 cout << "  ";
+            else if (Align[i][j].continuousCount == 1)
+                cout << 11;
             else
-                cout << " 0";
+                cout << "00";
+        }
         cout << endl;
     }
-
+    for(int i=0;i<querLength;i++)
+    {
+        for(int j=0;j<refeLength;j++)
+        {
+            if(Route[i][j] > 0)
+            {
+                if(Align[i][j].prevIndex == -1)
+                {
+                    int h=i,l=j;
+                    
+                    segments.push_back({i,j,Align[i][j].continuousCount,Align[i][j].maxScore,0});
+                }
+            }
+        }
+    }
 
     return;
 }
