@@ -226,14 +226,14 @@ void Repeater::drawSequence()
 void Repeater::printResults()
 {
 
-    cout << setw(5) << "No." << " | Repetition location(ref) | Sequence length | Repetition times | Reverse" << endl;
+    cout << setw(5) << "index" << " | POS in REF | Repeat size | Repeat count | Inverse" << endl;
 
     for (int i = 0; i < segments.size(); i++)
     {
-        cout << setw(4) << i + 1 << setw(15);
-        cout << segments[i].location << setw(25);
-        cout << segments[i].length << setw(18);
-        cout << segments[i].repetitionCount << setw(17);
+        cout << setw(5) << i + 1 << setw(13);
+        cout << segments[i].location << setw(14);
+        cout << segments[i].length << setw(15);
+        cout << segments[i].repetitionCount << setw(10);
         if (segments[i].isReversed)
             cout << "True" << endl;
         else
