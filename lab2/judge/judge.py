@@ -1,20 +1,7 @@
-try:
-    import numpy as np
-except ImportError:
-    print("请先安装 numpy 库: pip install numpy")
-    exit(1)
+import numpy as np
+from numba import njit
+import edlib
 
-try:
-    from numba import njit
-except ImportError:
-    print("请先安装 numba 库: pip install numba")
-    exit(1)
-
-try:
-    import edlib
-except ImportError:
-    print("请先安装 edlib 库: pip install edlib")
-    exit(1)
 
 
 def get_rc(s):
