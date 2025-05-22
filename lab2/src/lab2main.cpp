@@ -13,14 +13,14 @@ string sequenceAlignment(string reference, string query)
 int main()
 {
 
-    string reference1 = readFile("reference.in");
-    string query1 = readFile("query.in");
+    string reference1 = readFile("sequence/reference.in");
+    string query1 = readFile("sequence/query.in");
 
     cout << "process test1" << endl;
     string result1 = sequenceAlignment(reference1, query1);
 
-    string reference2 = readFile("reference2.in");
-    string query2 = readFile("query2.in");
+    string reference2 = readFile("sequence/reference2.in");
+    string query2 = readFile("sequence/query2.in");
 
     cout << "process test2" << endl;
     string result2 = sequenceAlignment(reference2, query2);

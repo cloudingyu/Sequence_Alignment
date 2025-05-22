@@ -18,6 +18,7 @@ string readFile(const string& filename)
         cerr << "Error to read " << endl;
         return "";
     }
+    return result;
  }
 
 void writeFile(const string& filename, const string& content)
