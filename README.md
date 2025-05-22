@@ -27,7 +27,6 @@ Sequence Alignment/
 ├── build/               # 构建目录
 │   └── ...
 ├── lab2/
-├── lab3/
 └── README.md            # 项目说明文档
 ```
 

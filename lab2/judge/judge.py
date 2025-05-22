@@ -117,46 +117,35 @@ if __name__ == "__main__":
     import os
     import sys
     
-    # 测试文件1
-    print("测试文件1的得分：")
     ref_file1 = os.path.join(os.path.dirname(os.path.dirname(__file__)), "sequence", "reference1.in")
     query_file1 = os.path.join(os.path.dirname(os.path.dirname(__file__)), "sequence", "query1.in")
     result_file1 = os.path.join(os.path.dirname(os.path.dirname(__file__)), "result", "result1.out")
     
-    # 读取reference文件
     with open(ref_file1, "r") as f:
         ref1 = f.read().strip()
     
-    # 读取query文件
     with open(query_file1, "r") as f:
         query1 = f.read().strip()
     
-    # 读取result文件
     with open(result_file1, "r") as f:
         result1 = f.read().strip()
     
-    # 计算得分
     score1 = calculate_value(result1, ref1, query1)
-    print(f"文件1得分: {score1}")
-      # 测试文件2
-    print("\n测试文件2的得分：")
+    print(f"test1: {score1}")
+
     ref_file2 = os.path.join(os.path.dirname(os.path.dirname(__file__)), "sequence", "reference2.in")
     query_file2 = os.path.join(os.path.dirname(os.path.dirname(__file__)), "sequence", "query2.in")
     result_file2 = os.path.join(os.path.dirname(os.path.dirname(__file__)), "result", "result2.out")
     
-    # 读取reference文件
     with open(ref_file2, "r") as f:
         ref2 = f.read().strip()
     
-    # 读取query文件
     with open(query_file2, "r") as f:
         query2 = f.read().strip()
     
-    # 读取result文件
     with open(result_file2, "r") as f:
         result2 = f.read().strip()
     
-    # 计算得分
     score2 = calculate_value(result2, ref2, query2)
-    print(f"文件2得分: {score2}")
+    print(f"test2: {score2}")
 
