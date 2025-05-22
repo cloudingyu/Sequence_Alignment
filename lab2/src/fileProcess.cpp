@@ -1,7 +1,7 @@
+#include "fileProcess.h"
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <string.h>
 using namespace std;
 
 string readFile(const string& filename)

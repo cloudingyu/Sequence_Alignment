@@ -21,8 +21,8 @@ set_target_properties(lab2 PROPERTIES
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 add_custom_target(copy_files ALL
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/sequence/reference1.in ${CMAKE_CURRENT_SOURCE_DIR}/bin/reference.in
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/sequence/query1.in ${CMAKE_CURRENT_SOURCE_DIR}/bin/query.in
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/sequence/reference1.in ${CMAKE_CURRENT_SOURCE_DIR}/bin/reference1.in
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/sequence/query1.in ${CMAKE_CURRENT_SOURCE_DIR}/bin/query1.in
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/sequence/reference2.in ${CMAKE_CURRENT_SOURCE_DIR}/bin/reference2.in
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/sequence/query2.in ${CMAKE_CURRENT_SOURCE_DIR}/bin/query2.in
     DEPENDS lab2
