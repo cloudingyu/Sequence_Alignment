@@ -12,10 +12,11 @@ string readFile(const string& filename)
     {
         getline(Filee, result);
         Filee.close();
+        cout << "Successfully read: " << filename << " (length: " << result.length() << ")" << endl;
     }
     else
     {
-        cerr << "Error to read " << endl;
+        cerr << "Error: Unable to read file: " << filename << endl;
         return "";
     }
     return result;
@@ -28,9 +29,10 @@ void writeFile(const string& filename, const string& content)
     {
         outFile << content;
         outFile.close();
+        cout << "Successfully wrote to: " << filename << endl;
     }
     else
     {
-        cerr << "Error to write " << endl;
+        cerr << "Error: Unable to write to file: " << filename << endl;
     }
 }
