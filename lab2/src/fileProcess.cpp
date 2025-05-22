@@ -12,7 +12,6 @@ string readFile(const string& filename)
     {
         getline(Filee, result);
         Filee.close();
-        cout << "Successfully read: " << filename << " (length: " << result.length() << ")" << endl;
     }
     else
     {
@@ -29,7 +28,6 @@ void writeFile(const string& filename, const string& content)
     {
         outFile << content;
         outFile.close();
-        cout << "Successfully wrote to: " << filename << endl;
     }
     else
     {

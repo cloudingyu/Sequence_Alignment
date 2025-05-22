@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(lab2
     src/lab2main.cpp
     src/fileProcess.cpp
+    src/sequenceProcess.cpp
 )
 
 target_include_directories(lab2 PRIVATE 
