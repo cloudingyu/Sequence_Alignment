@@ -2,15 +2,6 @@ import numpy as np
 from numba import njit
 import edlib
 
-
-
-def get_rc(s):
-    map_dict = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G', 'N': 'N'}
-    l = []
-    for c in s:
-        l.append(map_dict[c])
-    l = l[::-1]
-    return ''.join(l)
 def rc(s):
     map_dict = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G', 'N': 'N'}
     l = []
@@ -18,52 +9,6 @@ def rc(s):
         l.append(map_dict[c])
     l = l[::-1]
     return ''.join(l)
-
-def seq2hashtable_multi_test(refseq, testseq, kmersize=15, shift = 1):
-    rc_testseq = get_rc(testseq)
-    testseq_len = len(testseq)
-    local_lookuptable = dict()
-    skiphash = hash('N'*kmersize)
-    for iloc in range(0, len(refseq) - kmersize + 1, 1):
-        hashedkmer = hash(refseq[iloc:iloc+kmersize])
-        if(skiphash == hashedkmer):
-            continue
-        if(hashedkmer in local_lookuptable):
-
-            local_lookuptable[hashedkmer].append(iloc)
-        else:
-            local_lookuptable[hashedkmer] = [iloc]
-    iloc = -1
-    readend = testseq_len-kmersize+1
-    one_mapinfo = []
-    preiloc = 0
-    while(True):
-   
-        iloc += shift
-        if(iloc >= readend):
-            break
-
-        #if(hash(testseq[iloc: iloc + kmersize]) == hash(rc_testseq[-(iloc + kmersize): -iloc])):
-            #continue
- 
-        hashedkmer = hash(testseq[iloc: iloc + kmersize])
-        if(hashedkmer in local_lookuptable):
-
-            for refloc in local_lookuptable[hashedkmer]:
-
-                one_mapinfo.append((iloc, refloc, 1, kmersize))
-
-
-
-        hashedkmer = hash(rc_testseq[-(iloc + kmersize): -iloc])
-        if(hashedkmer in local_lookuptable):
-            for refloc in local_lookuptable[hashedkmer]:
-                one_mapinfo.append((iloc, refloc, -1, kmersize))
-        preiloc = iloc
-
-    
-
-    return np.array(one_mapinfo)
 
 def get_points(tuples_str):
     data = []

@@ -27,7 +27,7 @@ struct GraphNode {
 
 // 计算字符串的滚动哈希值
 uint64_t rollingHash(const string& str, int start, int len) {
-    const uint64_t base = 257;
+    const uint64_t base = 5;
     const uint64_t mod = 1000000007;
     uint64_t hash_val = 0;
     uint64_t power = 1;
@@ -40,7 +40,7 @@ uint64_t rollingHash(const string& str, int start, int len) {
 }
 
 // 查找锚点（完全匹配的片段）
-vector<Anchor> findAnchors(const string& reference, const string& query, int min_length = 15) {
+vector<Anchor> findAnchors(const string& reference, const string& query, int min_length = 30) {
     vector<Anchor> anchors;
     unordered_map<uint64_t, vector<int>> ref_hash_map;
     
@@ -164,14 +164,6 @@ int calculateChainScore(const Anchor& a1, const Anchor& a2, const string& refere
         gap_penalty = 5 * 1.5 + 15 * 3 + (gap_diff - 20) * 5;
     }
     
-    // 距离惩罚：锚点间距离过远会被惩罚
-    int query_distance = a2.query_start - a1.query_end;
-    int ref_distance = a2.ref_start - a1.ref_end;
-    double distance_penalty = 0;
-    
-    if (query_distance > 1000 || ref_distance > 1000) {
-        distance_penalty = min(query_distance, ref_distance) * 0.01;
-    }
     
     // 重叠惩罚：如果锚点重叠，给予重惩罚
     double overlap_penalty = 0;
@@ -185,7 +177,7 @@ int calculateChainScore(const Anchor& a1, const Anchor& a2, const string& refere
         direction_bonus = min(a1.score, a2.score) * 0.05;
     }
     
-    return (int)(base_score - gap_penalty - distance_penalty - overlap_penalty + direction_bonus);
+    return (int)(base_score - gap_penalty - overlap_penalty + direction_bonus);
 }
 
 // 动态规划找到最优锚点链
@@ -280,9 +272,10 @@ vector<Anchor> findAnchorsMultiLevel(const string& reference, const string& quer
     
     // 第一层：长匹配（高质量锚点）
     vector<Anchor> long_anchors = findAnchors(reference, query, 25);
-    all_anchors.insert(all_anchors.end(), long_anchors.begin(), long_anchors.end());
     
-    // 第二层：中等长度匹配
+    
+    
+    // 第二层：中等长度匹配all_anchors.insert(all_anchors.end(), long_anchors.begin(), long_anchors.end());
     vector<Anchor> medium_anchors = findAnchors(reference, query, 15);
     all_anchors.insert(all_anchors.end(), medium_anchors.begin(), medium_anchors.end());
     
@@ -336,8 +329,8 @@ string sequenceAlignment(string reference, string query)
     ss << "[";
     for (int i = 0; i < final_matches.size(); i++) {
         if (i > 0) ss << ", ";
-        ss << "(" << final_matches[i].query_start << ", " << final_matches[i].query_end 
-           << ", " << final_matches[i].ref_start << ", " << final_matches[i].ref_end << ")";
+        ss << "((" << final_matches[i].query_start << ", " << final_matches[i].query_end 
+           << "),( " << final_matches[i].ref_start << ", " << final_matches[i].ref_end << "))";
     }
     ss << "]";
     
