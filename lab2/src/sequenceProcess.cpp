@@ -309,7 +309,7 @@ string sequenceAlignment(string reference, string query)
 {
     cout << "ref_length: " << reference.length() << ", query_length: " << query.length() << endl;
 
-    vector<Anchor> anchors = findAnchors(reference, query, 30);
+    vector<Anchor> anchors = findAnchors(reference, query, 10);
 
     cout << "anchors_count = " << anchors.size() << endl;
 
