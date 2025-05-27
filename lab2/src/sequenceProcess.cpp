@@ -309,7 +309,7 @@ string sequenceAlignment(string reference, string query)
 {
     cout << "ref_length: " << reference.length() << ", query_length: " << query.length() << endl;
 
-    vector<Anchor> anchors = findAnchors(reference, query, 10);
+    vector<Anchor> anchors = findAnchors(reference, query, 15);
 
     cout << "anchors_count = " << anchors.size() << endl;
 
@@ -321,6 +321,8 @@ string sequenceAlignment(string reference, string query)
     }
 
     vector<Anchor> optimal_chain = findOptimalChain(anchors, reference, query);
+
+    int len=0;
 
     stringstream ss;
     ss << "[";
