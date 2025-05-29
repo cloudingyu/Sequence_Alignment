@@ -97,7 +97,7 @@ double calculateMatchQuality(const Anchor &anchor, const string &reference, cons
 
     if (anchor.ifReverse)
     {
-        position_weight *= 0.5; // 反向互补匹配的权重降低
+        position_weight *= 0.5;
     }
 
     return (base_score + length_bonus) * position_weight;
@@ -254,7 +254,6 @@ vector<Anchor> findOptimalChain(vector<Anchor> &anchors, const string &reference
     if (anchors.empty())
         return anchors;
 
-    // 首先按照query_start排序锚点
     sort(anchors.begin(), anchors.end(),
          [](const Anchor &a, const Anchor &b)
          {
@@ -262,18 +261,15 @@ vector<Anchor> findOptimalChain(vector<Anchor> &anchors, const string &reference
          });
 
     int n = anchors.size();
-    vector<int> dp(n); // dp[i]表示以第i个锚点为结尾的最高分数
-    vector<int> prev(n, -1); // 记录前驱节点
+    vector<int> dp(n);
+    vector<int> prev(n, -1);
 
-    // 初始化DP数组
     for (int i = 0; i < n; i++) {
-        dp[i] = anchors[i].score; // 每个锚点至少贡献自身的分数
+        dp[i] = anchors[i].score;
     }
 
-    // 自底向上填充DP表
     for (int i = 1; i < n; i++) {
         for (int j = 0; j < i; j++) {
-            // 确保锚点j可以链接到锚点i（query序列上不重叠）
             if (anchors[j].query_end < anchors[i].query_start) {
                 int chain_score = dp[j] + calculateChainScore(anchors[j], anchors[i], reference, query);
                 if (chain_score > dp[i]) {
@@ -284,7 +280,6 @@ vector<Anchor> findOptimalChain(vector<Anchor> &anchors, const string &reference
         }
     }
 
-    // 找到得分最高的终点
     int best_end = 0;
     for (int i = 1; i < n; i++) {
         if (dp[i] > dp[best_end]) {
@@ -292,7 +287,6 @@ vector<Anchor> findOptimalChain(vector<Anchor> &anchors, const string &reference
         }
     }
 
-    // 回溯构建最优链
     vector<Anchor> optimal_chain;
     int current = best_end;
     while (current != -1) {
@@ -300,25 +294,13 @@ vector<Anchor> findOptimalChain(vector<Anchor> &anchors, const string &reference
         current = prev[current];
     }
 
-    // 由于是从终点回溯，需要反转结果
     reverse(optimal_chain.begin(), optimal_chain.end());
     return optimal_chain;
 }
 
 string sequenceAlignment(string reference, string query)
 {
-    cout << "ref_length: " << reference.length() << ", query_length: " << query.length() << endl;
-
     vector<Anchor> anchors = findAnchors(reference, query, 15);
-
-    cout << "anchors_count = " << anchors.size() << endl;
-
-    for (int i = 0; i < anchors.size(); i++)
-    {
-        cout << "anchor No." << i << " (query: " << anchors[i].query_start << "-" << anchors[i].query_end
-             << ", ref: " << anchors[i].ref_start << "-" << anchors[i].ref_end
-             << ", score: " << anchors[i].score << ", ifReverse: " << (anchors[i].ifReverse ? "True" : "False") << ")" << endl;
-    }
 
     vector<Anchor> optimal_chain = findOptimalChain(anchors, reference, query);
 

@@ -1,1 +1,0 @@
-cd ../build && make && cd ../bin && ./lab2 && python '/Users/chenjane/Desktop/计算机科学与技术/算法设计与分析/Sequence Alignment/lab2/judge/judge.py'
